@@ -11,13 +11,13 @@ String addPaymentModelToJson(AddPaymentModel data) =>
     json.encode(data.toJson());
 
 class AddPaymentModel {
+  String status;
+  String data;
+
   AddPaymentModel({
     required this.status,
     required this.data,
   });
-
-  String status;
-  String data;
 
   factory AddPaymentModel.fromJson(Map<String, dynamic> json) =>
       AddPaymentModel(

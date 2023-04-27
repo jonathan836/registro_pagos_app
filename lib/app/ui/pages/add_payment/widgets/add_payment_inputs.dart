@@ -18,6 +18,7 @@ class AddPaymentInput extends StatelessWidget {
         children: [
           GlobalInput(
             controller: controller.apartmentController,
+            keyboardType: TextInputType.number,
             validatorErrorText: controller.apartmentTextV!.error,
             focusNode: controller.aparmentFocusNode,
             placeholder: 'Nº de Apartamento',
@@ -35,6 +36,7 @@ class AddPaymentInput extends StatelessWidget {
           const SizedBox(height: 10),
           GlobalInput(
             controller: controller.nameController,
+            keyboardType: TextInputType.text,
             validatorErrorText: controller.nameTextV!.error,
             focusNode: controller.nameFocusNode,
             placeholder: 'Nombre',
@@ -49,9 +51,10 @@ class AddPaymentInput extends StatelessWidget {
           ),
           GlobalInput(
             controller: controller.amountController,
+            keyboardType: TextInputType.number,
             validatorErrorText: controller.amountTextV!.error,
             focusNode: controller.amountFocusNode,
-            placeholder: 'Nombre',
+            placeholder: 'Monto',
             validator: controller.validate,
             changed: controller.amountChanged,
             isPassword: false,

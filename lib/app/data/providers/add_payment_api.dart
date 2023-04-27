@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:ffi';
 
 import 'package:dio/dio.dart';
+import 'package:registro_pagos/app/ui/pages/add_payment/add_payment_model.dart';
 
 import '../../../app_config.dart';
 import '../../ui/pages/register/register_model.dart';
@@ -13,28 +14,27 @@ class AddPaymentApi {
 
   AddPaymentApi(this._dio);
 
-  final _controller = StreamController<List<RegisterModel>?>.broadcast();
+  final _controller = StreamController<List<AddPaymentModel>?>.broadcast();
 
-  Stream<List<RegisterModel>?> get onResults => _controller.stream;
+  Stream<List<AddPaymentModel>?> get onResults => _controller.stream;
 
-  Future<RegisterModel> post({
-    required dynamic apartment,
+  Future<AddPaymentModel> post({
+    required String apartment,
     required String name,
-    required dynamic amount,
+    required String amount,
   }) async {
     _cancelToken = CancelToken();
     final response = await _dio.post(
       '${AppConfig.instance.apiHost}addPayment',
-      // 'http://172.16.90.115:8091/api/login',
       data: {
-        'aparment': apartment,
+        'apartment': apartment,
         'name': name,
         'amount': amount,
       },
       cancelToken: _cancelToken,
     );
 
-    final data = RegisterModel.fromJson(response.data);
+    final data = AddPaymentModel.fromJson(response.data);
 
     return data;
   }

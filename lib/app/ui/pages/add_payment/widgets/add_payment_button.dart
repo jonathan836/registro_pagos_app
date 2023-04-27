@@ -50,7 +50,7 @@ class _AddPaymentButtonState extends State<AddPaymentButton> {
                         showAlertOptions(
                           context,
                           title: 'Importante',
-                          msg: 'Usuario y/o contraseña incorrecta.',
+                          msg: result.data,
                         );
                       }
                     } else {
@@ -93,15 +93,24 @@ class _AddPaymentButtonState extends State<AddPaymentButton> {
       ),
     );
   }
-}
 
-Future<void> paymentAdded(
-  BuildContext context,
-  String msg,
-) async {
-  showAlertOptions(
-    context,
-    title: 'Importante',
-    msg: msg,
-  );
+  Future<void> paymentAdded(
+    BuildContext context,
+    String msg,
+  ) async {
+    showAlertOptions(
+      context,
+      title: 'Importante',
+      msg: msg,
+    );
+
+    setState(() {
+      final controller =
+          Provider.of<AddPaymentController>(context, listen: false);
+
+      controller.apartmentController.clear();
+      controller.nameController.clear();
+      controller.amountController.clear();
+    });
+  }
 }

@@ -76,10 +76,10 @@ class AddPaymentController extends ChangeNotifier {
     } else if (text.length < 2) {
       apartmentTextV = ValidationItem(
           null, 'Longitud del dato menor a la mínima requerida.');
-    } else if (text.length > 20) {
+    } else if (text.length > 5) {
       apartmentTextV =
           ValidationItem(null, 'La longitud del dato es mayor a la requerida.');
-    } else if (!text.isValidName) {
+    } else if (!text.isValidNumber) {
       apartmentTextV = ValidationItem(null, 'Dato Inválido');
     } else {
       apartmentTextV = ValidationItem(text, null);
@@ -91,7 +91,7 @@ class AddPaymentController extends ChangeNotifier {
   String? nameChanged(String text) {
     if (text.isEmpty) {
       nameTextV = ValidationItem(null, 'Campo requerido.');
-    } else if (text.length < 2) {
+    } else if (text.length < 5) {
       nameTextV = ValidationItem(
           null, 'Longitud del dato menor a la mínima requerida.');
     } else if (text.length > 20) {
@@ -109,13 +109,13 @@ class AddPaymentController extends ChangeNotifier {
   String? amountChanged(String text) {
     if (text.isEmpty) {
       amountTextV = ValidationItem(null, 'Campo requerido.');
-    } else if (text.length < 6) {
+    } else if (text.length < 3) {
       amountTextV = ValidationItem(
           null, 'Longitud del dato menor a la mínima requerida.');
-    } else if (text.length > 20) {
+    } else if (text.length > 12) {
       amountTextV =
           ValidationItem(null, 'La longitud del dato es mayor a la requerida.');
-    } else if (!text.isValidUsername) {
+    } else if (!text.isValidDecimal) {
       amountTextV = ValidationItem(null, 'Dato Inválido');
     } else {
       amountTextV = ValidationItem(text, null);
@@ -124,43 +124,12 @@ class AddPaymentController extends ChangeNotifier {
     return null;
   }
 
-  // String? passwordChanged(String text) {
-  //   if (text.isEmpty) {
-  //     passwordTextV = ValidationItem(null, 'Campo requerido.');
-  //   } else if (text.length < 6) {
-  //     passwordTextV = ValidationItem(
-  //         null, 'Longitud del dato menor a la mínima requerida.');
-  //   } else if (text.length > 12) {
-  //     passwordTextV =
-  //         ValidationItem(null, 'La longitud del dato es mayor a la requerida.');
-  //   }
-  //   // else if (!text.isValidPassword) {
-  //   //   passwordTextV = ValidationItem(null, LocaleKeys.invalidData.tr());
-  //   // }
-  //   else {
-  //     passwordTextV = ValidationItem(text, null);
-  //   }
-  //   notifyListeners();
-  //   return null;
-  // }
-
-  void passwordVisibleToggle() {
-    if (passwordVisible == true) {
-      iconPassword = Icons.visibility_rounded;
-    } else {
-      iconPassword = Icons.visibility_off_rounded;
-    }
-    passwordVisible = !passwordVisible;
-
-    notifyListeners();
-  }
-
   Future<AddPaymentModel?> addPayment() async {
     final AddPaymentModel result = (await _addPaymentApi.post(
-      apartment: apartmentController.text as int,
+      apartment: apartmentController.text,
       name: nameController.text,
       amount: amountController.text,
-    )) as AddPaymentModel;
+    ));
 
     return result;
   }

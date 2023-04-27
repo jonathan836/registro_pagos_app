@@ -21,6 +21,16 @@ extension extString on String {
     return nameRegExp.hasMatch(this);
   }
 
+  bool get isValidNumber {
+    final numberRegExp = RegExp(r'^[0-9]+$');
+    return numberRegExp.hasMatch(this);
+  }
+
+  bool get isValidDecimal {
+    final decimalRegExp = RegExp(r'^[0-9]+([.][0-9]+)?$');
+    return decimalRegExp.hasMatch(this);
+  }
+
   // En caso de no esta vacio retorna null
   bool get isNotNull {
     return this != null;

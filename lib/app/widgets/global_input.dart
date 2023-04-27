@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 
 class GlobalInput extends StatefulWidget {
   final TextEditingController controller;
+  final TextInputType? keyboardType;
   final FocusNode focusNode;
   final String placeholder;
   final String? validatorErrorText;
-  final dynamic? validator;
+  final dynamic validator;
   final String? Function(String val)? changed;
   final VoidCallback? showPasswordOrClear;
   final IconData? icon;
@@ -27,6 +28,7 @@ class GlobalInput extends StatefulWidget {
     this.changed,
     required this.focusNode,
     required this.controller,
+    this.keyboardType,
     this.showPasswordOrClear,
     this.icon,
     this.isPassword,
@@ -66,6 +68,7 @@ class _GlobalInputState extends State<GlobalInput> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextFormField(
+        keyboardType: widget.keyboardType,
         controller: widget.controller,
         maxLength: widget.maxLength,
         onTap: () {
